@@ -1,10 +1,12 @@
 package routes
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/domjesus/api-go-gin/controllers"
 	"github.com/gin-gonic/gin"
+	"github.com/gorilla/handlers"
 	"go.uber.org/zap"
 )
 
@@ -13,14 +15,14 @@ func HandleRequests(l *zap.SugaredLogger) {
 	// r.HTMLRender = loadTemplates("./templates")
 	// r.HTMLRender = loadTemplates("./dist")
 
-	r.LoadHTMLFiles("./frontend/dist/index.html")
+	// r.LoadHTMLFiles("./frontend/dist/index.html")
 
 	// r.LoadHTMLGlob("templates/*")
 	// html := template.Must(template.ParseFiles("templates/index.html"))
 	// r.SetHTMLTemplate(html)
 
-	r.Static("/js", "./frontend/dist/js")
-	r.Static("/css", "./frontend/dist/css")
+	// r.Static("/js", "./frontend/dist/js")
+	// r.Static("/css", "./frontend/dist/css")
 
 	// r.Static("/dist/assets", "dist/assets")
 
@@ -28,9 +30,9 @@ func HandleRequests(l *zap.SugaredLogger) {
 	// config.AllowOrigins = []string{"*"}
 
 	// r.GET("/:nome", controllers.Saudacoes)
-	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", nil)
-	})
+	// r.GET("/", func(c *gin.Context) {
+	// 	c.HTML(http.StatusOK, "index.html", nil)
+	// })
 	r.GET("/aluno_create", controllers.AlunoCreate)
 	r.GET("/alunos_listar", controllers.ListaAlunos)
 	r.GET("/alunos", controllers.ExibeTodosAlunos)
@@ -45,12 +47,12 @@ func HandleRequests(l *zap.SugaredLogger) {
 	//router.LoadHTMLFiles("templates/template1.html", "templates/template2.html")
 	// r.NoRoute(controllers.RouteNotFound)
 
-	// log.Fatal(http.ListenAndServe(":8001", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r)))
 	// r.Use(cors.New(config))
 	// r.Use(cors.Default())
 	l.Info("Routes done")
+	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r)))
 
-	r.Run()
+	// r.Run()
 	// r.Run(":8000")
 
 }

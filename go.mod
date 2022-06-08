@@ -53,6 +53,7 @@ require (
 require (
 	github.com/goccy/go-json v0.9.7 // indirect
 	github.com/google/go-cmp v0.5.6 // indirect
+	github.com/gorilla/handlers v1.5.1
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
 	github.com/pkg/errors v0.8.2-0.20190227000051-27936f6d90f9 // indirect
@@ -62,3 +63,5 @@ require (
 	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
 	golang.org/x/tools v0.0.0-20200103221440-774c71fcf114 // indirect
 )
+
+require github.com/felixge/httpsnoop v1.0.1 // indirect
