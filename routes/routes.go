@@ -13,14 +13,14 @@ func HandleRequests(l *zap.SugaredLogger) {
 	// r.HTMLRender = loadTemplates("./templates")
 	// r.HTMLRender = loadTemplates("./dist")
 
-	r.LoadHTMLFiles("./dist/index.html", "templates/includes/aluno_create.html")
+	r.LoadHTMLFiles("./frontend/dist/index.html")
 
 	// r.LoadHTMLGlob("templates/*")
 	// html := template.Must(template.ParseFiles("templates/index.html"))
 	// r.SetHTMLTemplate(html)
 
-	r.Static("/js", "./dist/js")
-	r.Static("/css", "./dist/css")
+	r.Static("/js", "./frontend/dist/js")
+	r.Static("/css", "./frontend/dist/css")
 
 	// r.Static("/dist/assets", "dist/assets")
 
