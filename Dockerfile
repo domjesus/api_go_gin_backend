@@ -1,21 +1,30 @@
-FROM heroku/heroku:20-build as build
+# FROM heroku/heroku:20-build as build
 
-COPY . /app
-WORKDIR /app
+# COPY . /app
+# WORKDIR /app
 
-# Setup buildpack
-RUN mkdir -p /tmp/buildpack/heroku/go /tmp/build_cache /tmp/env
-RUN curl https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/go.tgz | tar xz -C /tmp/buildpack/heroku/go
+# # Setup buildpack
+# RUN mkdir -p /tmp/buildpack/heroku/go /tmp/build_cache /tmp/env
+# RUN curl https://buildpack-registry.s3.amazonaws.com/buildpacks/heroku/go.tgz | tar xz -C /tmp/buildpack/heroku/go
 
-#Execute Buildpack
-RUN STACK=heroku-20 /tmp/buildpack/heroku/go/bin/compile /app /tmp/build_cache /tmp/env
+# #Execute Buildpack
+# RUN STACK=heroku-20 /tmp/buildpack/heroku/go/bin/compile /app /tmp/build_cache /tmp/env
 
-# Prepare final, minimal image
-FROM heroku/heroku:20
+# # Prepare final, minimal image
+# FROM heroku/heroku:20
 
-COPY --from=build /app /app
-ENV HOME /app
-WORKDIR /app
-RUN useradd -m heroku
-USER heroku
-CMD /app/bin/api-go-gin
+# COPY --from=build /app /app
+# ENV HOME /app
+# WORKDIR /app
+# RUN useradd -m heroku
+# USER heroku
+# CMD /app/bin/api-go-gin
+
+FROM golang:1.16 as base
+
+FROM base as dev
+
+RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+
+WORKDIR /opt/app/api
+CMD ["air"]

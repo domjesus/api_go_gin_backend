@@ -50,7 +50,7 @@ func HandleRequests(l *zap.SugaredLogger) {
 	// r.Use(cors.New(config))
 	// r.Use(cors.Default())
 	l.Info("Routes done")
-	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r)))
+	log.Fatal(http.ListenAndServe(":8084", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r)))
 
 	// r.Run()
 	// r.Run(":8000")

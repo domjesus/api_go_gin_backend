@@ -1,5 +1,20 @@
 version: '3'
 services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: dev
+    volumes:
+        - .:/opt/app/api
+    command: go run main.go
+    ports:
+      - "8084:8084"
+    environment: 
+      - DATABASE_HOST=postgres
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+      - DATABASE_NAME=root
   postgres:
     image: "postgres"
     environment:
@@ -20,3 +35,4 @@ services:
       - "54321:80"
     depends_on:
       - postgres
+    
